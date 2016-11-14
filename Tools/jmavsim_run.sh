@@ -34,6 +34,12 @@ else
 	device="-serial $device $baudrate"
 fi
 
+if [ -n "$JMAVSIM_QCG_ARGUMENT" ]; then
+	extra_args="$JMAVSIM_QCG_ARGUMENT $extra_args"
+  echo "Using QGC args:"
+  echo $extra_args
+fi
+
 ant create_run_jar copy_res
 cd out/production
 java -Djava.ext.dirs= -jar jmavsim_run.jar $device $extra_args
